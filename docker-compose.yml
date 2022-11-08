@@ -1,0 +1,15 @@
+version: '3.9'
+services:
+    mariadb:
+        image: mariadb:latest
+        container_name: mary
+        command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+        ports:
+            - "3360:3306"
+        volumes:
+            - maria_data:/var/lib/mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=mariadb
+            - TZ=America/Mexico_City
+volumes:
+    maria_data:
