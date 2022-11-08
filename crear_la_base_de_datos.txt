@@ -1,0 +1,26 @@
+# CREATE DATABASE
+CREATE DATABASE quotes CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+# CREATE USER
+GRANT ALL PRIVILEGES ON quotes.* TO denoDev@'%' IDENTIFIED BY 'mariadb';
+
+# TO USE THE DATABASE
+USE quotes;
+
+# CREATE TABLE user
+CREATE TABLE user(
+	id INT AUTO_INCREMENT
+	,account VARCHAR(200) NOT NULL
+	,password VARCHAR(128) NOT NULL
+	,CONSTRAINT pkuser PRIMARY KEY (id)
+);
+
+# WAY 1 TO INSERT DATA INTO TABLE WITH SHA512
+
+INSERT INTO user (account, password) VALUES ('asyncr', 'asyncr');
+UPDATE user SET password = sha2('asyncr', 512) WHERE id = 1; 
+													   // 1 is the id of the user( CHANGE IT ACCORDING TO YOUR NEED)
+
+# WAY 2 TO INSERT DATA INTO TABLE WITH SHA512
+
+INSERT INTO user (account, password) VALUES ('deno',sha2('deno', 512));
